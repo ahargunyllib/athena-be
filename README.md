@@ -59,4 +59,4 @@ The member of our team
 
 ## Useful Link
 
-- [Athena Frontend Repository](https://github.com/ahargunyllib/athea)
+- [Athena Frontend Repository](https://github.com/ahargunyllib/athena)
