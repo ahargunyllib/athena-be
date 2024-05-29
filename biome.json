@@ -47,6 +47,9 @@
 			"bracketSameLine": false,
 			"quoteStyle": "single",
 			"attributePosition": "auto"
+		},
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
 		}
 	}
 }
