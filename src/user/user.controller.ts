@@ -40,22 +40,37 @@ export class UserController {
     })
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(id)
+  @Get(':userId')
+  async findOne(@Param('userId') userId: string, @Res() res: Response) {
+    const user = await this.userService.findOne(userId)
+    return res.status(HttpStatus.OK).json({
+      statusCode: HttpStatus.OK,
+      message: 'User retrieved successfully',
+      data: user,
+    })
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    try {
-      return this.userService.update(id, updateUserDto)
-    } catch (error) {
-      throw new BadRequestException(error.message)
+  @Patch(':userId')
+  async update(
+    @Param('userId') userId: string,
+    @Body() updateUserDto: UpdateUserDto,
+    @Res() res: Response,
+  ) {
+    const user = await this.userService.update(userId, updateUserDto)
+    return res.status(HttpStatus.OK).json({
+      statusCode: HttpStatus.OK,
+      message: 'User updated successfully',
+      data: user,
+    })
+  }
+
+  @Delete(':userId')
+  async remove(@Param('userId') userId: string) {
+    await this.userService.remove(userId)
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'User deleted successfully',
+      data: [],
     }
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(id)
   }
 }
