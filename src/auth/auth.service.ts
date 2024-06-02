@@ -16,6 +16,7 @@ import {
   registerSchema,
 } from './dto/register.dto'
 import { User } from 'src/user/entities/user.entity'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
@@ -37,7 +38,8 @@ export class AuthService {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
 
-    if (user.password !== validatedDto.password) {
+    const isMatch = await bcrypt.compare(validatedDto.password, user.password)
+    if (!isMatch) {
       throw new HttpException('Invalid password', HttpStatus.BAD_REQUEST)
     }
 
@@ -72,6 +74,8 @@ export class AuthService {
     if (user) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST)
     }
+
+    validatedDto.password = await bcrypt.hash(validatedDto.password, 10)
 
     const newUser = await this.db.user.create({
       data: new RegisterDto(validatedDto),
