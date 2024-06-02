@@ -15,7 +15,7 @@ describe('UserController', () => {
   let _logger: Logger
   let testService: TestService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule, TestModule],
     }).compile()
