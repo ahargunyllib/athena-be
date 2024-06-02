@@ -5,7 +5,6 @@ import * as winston from 'winston'
 import { PrismaService } from './prisma.service'
 import { ValidationService } from './validation.service'
 import { ErrorFilter } from './error.filter'
-import { AuthMiddleware } from './auth.middleware'
 
 @Global()
 @Module({
@@ -29,8 +28,4 @@ import { AuthMiddleware } from './auth.middleware'
   ],
   exports: [PrismaService, ValidationService],
 })
-export class CommonModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('/api/*')
-  }
-}
+export class CommonModule {}
