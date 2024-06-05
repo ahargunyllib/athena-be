@@ -15,8 +15,8 @@ import {
   RegisterDtoType,
   registerSchema,
 } from './dto/register.dto'
-import { User } from 'src/user/entities/user.entity'
 import * as bcrypt from 'bcrypt'
+import { UserTokenDTO, UserTokenDtoType } from './dto/token.dto'
 
 @Injectable()
 export class AuthService {
@@ -45,19 +45,25 @@ export class AuthService {
 
     const token = this.jwtService.sign({
       userId: user.userId,
-      fullName: user.fullName,
       email: user.email,
+      username: user.username,
+      fullName: user.fullName,
+      phoneNumber: user.phoneNumber,
+      dateOfBirth: user.dateOfBirth,
     })
 
     return {
       token,
       user: {
         userId: user.userId,
-        fullName: user.fullName,
         email: user.email,
+        username: user.username,
+        fullName: user.fullName,
+        phoneNumber: user.phoneNumber,
+        dateOfBirth: user.dateOfBirth,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
-      },
+      }
     }
   }
 
@@ -67,9 +73,15 @@ export class AuthService {
       registerDto,
     )
 
-    const user = await this.db.user.findUnique({
+    let user = await this.db.user.findUnique({
       where: { email: validatedDto.email },
     })
+
+    if (!user) {
+      user = await this.db.user.findUnique({
+        where: { username: validatedDto.username },
+      })
+    }
 
     if (user) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST)
@@ -82,7 +94,10 @@ export class AuthService {
       select: {
         userId: true,
         fullName: true,
+        username: true,
         email: true,
+        phoneNumber: true,
+        dateOfBirth: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -91,12 +106,8 @@ export class AuthService {
     return newUser
   }
 
-  async refreshToken(user: User) {
-    const newToken = this.jwtService.sign({
-      userId: user.userId,
-      fullName: user.fullName,
-      email: user.email,
-    })
+  async refreshToken(user: UserTokenDtoType) {
+    const newToken = this.jwtService.sign(user)
 
     return newToken
   }

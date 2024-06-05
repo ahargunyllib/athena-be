@@ -15,7 +15,7 @@ import { LoginDtoType } from './dto/login.dto'
 import { Request, Response } from 'express'
 import { LocalGuard } from './guard/local.guard'
 import { JwtGuard } from './guard/jwt.guard'
-import { User } from 'src/user/entities/user.entity'
+import { UserTokenDtoType } from './dto/token.dto'
 
 @Controller('/api/auth')
 export class AuthController {
@@ -48,7 +48,7 @@ export class AuthController {
   @Post('refresh-token')
   @UseGuards(JwtGuard)
   async refreshToken(@Req() req: Request, @Res() res: Response) {
-    const token = await this.authService.refreshToken(req.user as User)
+    const token = await this.authService.refreshToken(req.user as UserTokenDtoType)
 
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,

@@ -35,7 +35,10 @@ describe('AuthController', () => {
     it('should return a user', async () => {
       const registerDto: RegisterDtoType = {
         fullName: 'test',
+        username: 'test',
         email: 'test@test.com',
+        phoneNumber: '1234567890',
+        dateOfBirth: new Date().toISOString(),
         password: '123456',
       }
 
@@ -50,7 +53,10 @@ describe('AuthController', () => {
         data: {
           userId: expect.any(String),
           fullName: registerDto.fullName,
+          username: registerDto.username,
           email: registerDto.email,
+          phoneNumber: registerDto.phoneNumber,
+          dateOfBirth: registerDto.dateOfBirth,
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
         },
@@ -60,7 +66,10 @@ describe('AuthController', () => {
     it('should return a 400 error if user already exists', async () => {
       const registerDto: RegisterDtoType = {
         fullName: 'test',
+        username: 'test',
         email: 'test@test.com',
+        phoneNumber: '1234567890',
+        dateOfBirth: new Date().toISOString(),
         password: '123456',
       }
 
@@ -75,7 +84,10 @@ describe('AuthController', () => {
         data: {
           userId: expect.any(String),
           fullName: registerDto.fullName,
+          username: registerDto.username,
           email: registerDto.email,
+          phoneNumber: registerDto.phoneNumber,
+          dateOfBirth: registerDto.dateOfBirth,
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
         },
@@ -121,7 +133,10 @@ describe('AuthController', () => {
     it('should return a token and user', async () => {
       const registerDto: RegisterDtoType = {
         fullName: 'test',
+        username: 'test',
         email: 'test@test.com',
+        phoneNumber: '1234567890',
+        dateOfBirth: new Date().toISOString(),
         password: '123456',
       }
 
@@ -136,7 +151,10 @@ describe('AuthController', () => {
         data: {
           userId: expect.any(String),
           fullName: registerDto.fullName,
+          username: registerDto.username,
           email: registerDto.email,
+          phoneNumber: registerDto.phoneNumber,
+          dateOfBirth: registerDto.dateOfBirth,
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
         },
@@ -160,7 +178,10 @@ describe('AuthController', () => {
           user: {
             userId: expect.any(String),
             fullName: registerDto.fullName,
+            username: registerDto.username,
             email: registerDto.email,
+            phoneNumber: registerDto.phoneNumber,
+            dateOfBirth: registerDto.dateOfBirth,
             createdAt: expect.any(String),
             updatedAt: expect.any(String),
           },
@@ -189,7 +210,10 @@ describe('AuthController', () => {
     it('should return a 400 error if password is invalid', async () => {
       const registerDto: RegisterDtoType = {
         fullName: 'test',
+        username: 'test',
         email: 'test@test.com',
+        phoneNumber: '1234567890',
+        dateOfBirth: new Date().toISOString(),
         password: '123456',
       }
 
@@ -204,7 +228,10 @@ describe('AuthController', () => {
         data: {
           userId: expect.any(String),
           fullName: registerDto.fullName,
+          username: registerDto.username,
           email: registerDto.email,
+          phoneNumber: registerDto.phoneNumber,
+          dateOfBirth: registerDto.dateOfBirth,
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
         },

@@ -7,7 +7,10 @@ async function main() {
   const users = Array.from({ length: 10 }).map(() => ({
     email: faker.internet.email(),
     fullName: faker.person.fullName(),
-    password: faker.internet.password(),
+    username: faker.person.middleName(),
+    dateOfBirth: faker.date.past().toISOString(),
+    phoneNumber: faker.phone.number().toString(),
+    password: faker.internet.password()
   }))
 
   await db.user.createMany({
