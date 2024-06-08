@@ -18,11 +18,34 @@ model User {
   email       String   @unique
   fullName    String
   username    String   @unique
-  phoneNumber String   
+  phoneNumber String
   dateOfBirth DateTime
   password    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  friends  Friendship[] @relation("UserFriendship")
+  friendOf Friendship[] @relation("FriendFriendship")
+
   @@map("users")
+}
+
+model Friendship {
+  friendshipId String            @id @default(uuid())
+  user         User              @relation(fields: [userId], references: [userId], "UserFriendship")
+  userId       String
+  friend       User              @relation(fields: [friendId], references: [userId], "FriendFriendship")
+  friendId     String
+  status       FriendshipStatus?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@unique([userId, friendId])
+  @@unique([friendId, userId])
+  @@map("friendships")
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
 }
