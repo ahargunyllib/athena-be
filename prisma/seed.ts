@@ -13,6 +13,16 @@ async function main() {
       dateOfBirth: faker.date.past().toISOString(),
       phoneNumber: faker.phone.number().toString(),
       password: await bcrypt.hash('123456', 10),
+      latitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[0],
+      longitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[1],
     },
   })
 
@@ -24,6 +34,16 @@ async function main() {
       dateOfBirth: faker.date.past().toISOString(),
       phoneNumber: faker.phone.number().toString(),
       password: await bcrypt.hash('123456', 10),
+      latitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[0],
+      longitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[1],
     },
   })
 
@@ -35,6 +55,16 @@ async function main() {
       dateOfBirth: faker.date.past().toISOString(),
       phoneNumber: faker.phone.number().toString(),
       password: await bcrypt.hash('123456', 10),
+      latitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[0],
+      longitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[1],
     },
   })
 
@@ -46,6 +76,16 @@ async function main() {
       dateOfBirth: faker.date.past().toISOString(),
       phoneNumber: faker.phone.number().toString(),
       password: await bcrypt.hash('123456', 10),
+      latitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[0],
+      longitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[1],
     },
   })
 
@@ -57,6 +97,16 @@ async function main() {
       dateOfBirth: faker.date.past().toISOString(),
       phoneNumber: faker.phone.number().toString(),
       password: await bcrypt.hash('123456', 10),
+      latitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[0],
+      longitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[1],
     },
   })
 
@@ -68,6 +118,16 @@ async function main() {
       dateOfBirth: faker.date.past().toISOString(),
       phoneNumber: faker.phone.number().toString(),
       password: await bcrypt.hash('123456', 10),
+      latitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[0],
+      longitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[1],
     },
   })
 

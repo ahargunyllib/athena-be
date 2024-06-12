@@ -20,6 +20,8 @@ model User {
   username    String   @unique
   phoneNumber String
   dateOfBirth DateTime
+  latitude    Decimal? @db.Decimal(9, 6)
+  longitude   Decimal? @db.Decimal(9, 6)
   password    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
