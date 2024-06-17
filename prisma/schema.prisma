@@ -29,6 +29,8 @@ model User {
   friends  Friendship[] @relation("UserFriendship")
   friendOf Friendship[] @relation("FriendFriendship")
 
+  messages Message[]
+
   @@map("users")
 }
 
@@ -39,6 +41,8 @@ model Friendship {
   friend       User              @relation(fields: [friendId], references: [userId], "FriendFriendship")
   friendId     String
   status       FriendshipStatus?
+  chatRoomId   String?
+  chatRoom     ChatRoom?
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 
@@ -50,4 +54,39 @@ model Friendship {
 enum FriendshipStatus {
   PENDING
   ACCEPTED
+}
+
+model ChatRoom {
+  chatRoomId String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+
+  friendshipId String     @unique
+  friendship   Friendship @relation(fields: [friendshipId], references: [friendshipId])
+
+  messages Message[]
+
+  @@map("chat_rooms")
+}
+
+model Message {
+  messageId String      @id @default(uuid())
+  content   String
+  type      MessageType
+  createdAt DateTime    @default(now())
+
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [userId])
+
+  chatRoomId String
+  chatRoom   ChatRoom @relation(fields: [chatRoomId], references: [chatRoomId])
+
+  @@map("messages")
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  LOCATION
 }

@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client'
+import { MessageType, PrismaClient, User } from '@prisma/client'
 import { faker } from '@faker-js/faker'
 import * as bcrypt from 'bcrypt'
 
@@ -131,7 +131,7 @@ async function main() {
     },
   })
 
-  await db.friendship.create({
+  const billy_selvi = await db.friendship.create({
     data: {
       userId: billy.userId,
       friendId: selvi.userId,
@@ -139,7 +139,7 @@ async function main() {
     },
   })
 
-  await db.friendship.create({
+  const aufii_billy = await db.friendship.create({
     data: {
       userId: aufii.userId,
       friendId: billy.userId,
@@ -161,6 +161,36 @@ async function main() {
       friendId: billy.userId,
       status: 'PENDING',
     },
+  })
+
+  const billy_selvi_chatRoom = await db.chatRoom.create({
+    data: {
+      friendshipId: billy_selvi.friendshipId,
+    }
+  })
+
+  const _aufii_billy_chatRoom = await db.chatRoom.create({
+    data: {
+      friendshipId: aufii_billy.friendshipId,
+    }
+  })
+
+  await db.message.create({
+    data: {
+      chatRoomId: billy_selvi_chatRoom.chatRoomId,
+      senderId: billy.userId,
+      content: 'Hello Selvi!',
+      type: MessageType.TEXT,
+    }
+  })
+
+  await db.message.create({
+    data: {
+      chatRoomId: billy_selvi_chatRoom.chatRoomId,
+      senderId: selvi.userId,
+      content: 'Hello Billy!',
+      type: MessageType.TEXT,
+    }
   })
 }
 

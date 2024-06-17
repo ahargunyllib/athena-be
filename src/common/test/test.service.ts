@@ -8,6 +8,8 @@ export class TestService {
   constructor(private db: PrismaService) {}
 
   async deleteAll() {
+    await this.deleteMessage()
+    await this.deleteChatRoom()
     await this.deleteFriendship()
     await this.deleteUser()
   }
@@ -18,6 +20,14 @@ export class TestService {
 
   async deleteFriendship() {
     await this.db.friendship.deleteMany({})
+  }
+
+  async deleteChatRoom() {
+    await this.db.chatRoom.deleteMany({})
+  }
+
+  async deleteMessage() {
+    await this.db.message.deleteMany({})
   }
 
   async createUser() {
