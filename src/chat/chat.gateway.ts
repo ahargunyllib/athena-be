@@ -76,9 +76,11 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
     const userId = client.data.userId
     this.server.to(payload.chatRoomId).emit('message', {
-      userId,
+      chatRoomId: payload.chatRoomId,
+      senderId: userId,
       message: payload.message,
       type: payload.type,
+      createdAt: new Date(),
     })
 
     let messageType: MessageType = MessageType.TEXT
