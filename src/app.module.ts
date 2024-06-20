@@ -6,9 +6,10 @@ import { LocationModule } from './location/location.module';
 import { ChatGateway } from './chat/chat.gateway';
 import { ChatModule } from './chat/chat.module';
 import { UserModule } from './user/user.module';
+import { SosModule } from './sos/sos.module';
 
 @Module({
-  imports: [CommonModule, AuthModule, FriendshipModule, LocationModule, ChatModule, UserModule],
+  imports: [CommonModule, AuthModule, FriendshipModule, LocationModule, ChatModule, UserModule, SosModule],
   controllers: [],
 })
 export class AppModule {}
