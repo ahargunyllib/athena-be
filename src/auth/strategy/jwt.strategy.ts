@@ -22,6 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       fullName: payload.fullName,
       phoneNumber: payload.phoneNumber,
       dateOfBirth: payload.dateOfBirth,
+      imageUrl: payload.imageUrl,
     }
   }
 }

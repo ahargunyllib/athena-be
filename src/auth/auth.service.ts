@@ -50,6 +50,7 @@ export class AuthService {
       fullName: user.fullName,
       phoneNumber: user.phoneNumber,
       dateOfBirth: user.dateOfBirth,
+      imageUrl: user.imageUrl,
     })
 
     return {
@@ -61,6 +62,7 @@ export class AuthService {
         fullName: user.fullName,
         phoneNumber: user.phoneNumber,
         dateOfBirth: user.dateOfBirth,
+        imageUrl: user.imageUrl,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       }
@@ -98,6 +100,7 @@ export class AuthService {
         email: true,
         phoneNumber: true,
         dateOfBirth: true,
+        imageUrl: true,
         createdAt: true,
         updatedAt: true,
       },

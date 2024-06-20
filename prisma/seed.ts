@@ -23,6 +23,7 @@ async function main() {
         radius: 1,
         isMetric: true
       })[1],
+      imageUrl: "https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png",
     },
   })
 
@@ -44,6 +45,7 @@ async function main() {
         radius: 1,
         isMetric: true
       })[1],
+      imageUrl: "https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png",
     },
   })
 
@@ -65,6 +67,7 @@ async function main() {
         radius: 1,
         isMetric: true
       })[1],
+      imageUrl: "https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png",
     },
   })
 
@@ -86,6 +89,7 @@ async function main() {
         radius: 1,
         isMetric: true
       })[1],
+      imageUrl: "https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png",
     },
   })
 
@@ -107,6 +111,7 @@ async function main() {
         radius: 1,
         isMetric: true
       })[1],
+      imageUrl: "https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png",
     },
   })
 
@@ -128,6 +133,7 @@ async function main() {
         radius: 1,
         isMetric: true
       })[1],
+      imageUrl: "https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png",
     },
   })
 

@@ -40,6 +40,7 @@ export class LocationService {
             fullName: true,
             latitude: true,
             longitude: true,
+            imageUrl: true
           },
         },
       },
@@ -58,6 +59,7 @@ export class LocationService {
             fullName: true,
             latitude: true,
             longitude: true,
+            imageUrl: true
           },
         },
       },
@@ -70,6 +72,7 @@ export class LocationService {
         fullName: friendRequest.user.fullName,
         latitude: friendRequest.user.latitude,
         longitude: friendRequest.user.longitude,
+        imageUrl: friendRequest.user.imageUrl
       }
     })
 
@@ -81,6 +84,7 @@ export class LocationService {
           fullName: userRequest.friend.fullName,
           latitude: userRequest.friend.latitude,
           longitude: userRequest.friend.longitude,
+          imageUrl: userRequest.friend.imageUrl
         }
       }),
     )

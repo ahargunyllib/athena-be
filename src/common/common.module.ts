@@ -5,6 +5,7 @@ import * as winston from 'winston'
 import { PrismaService } from './prisma.service'
 import { ValidationService } from './validation.service'
 import { ErrorFilter } from './error.filter'
+import { MulterService } from './multer.service'
 
 @Global()
 @Module({
@@ -25,7 +26,8 @@ import { ErrorFilter } from './error.filter'
       provide: 'APP_FILTER',
       useClass: ErrorFilter,
     },
+    MulterService,
   ],
-  exports: [PrismaService, ValidationService],
+  exports: [PrismaService, ValidationService, MulterService],
 })
 export class CommonModule {}

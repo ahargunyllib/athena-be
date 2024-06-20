@@ -22,6 +22,7 @@ model User {
   dateOfBirth DateTime
   latitude    Decimal? @db.Decimal(9, 6)
   longitude   Decimal? @db.Decimal(9, 6)
+  imageUrl    String? @default("https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png")
   password    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

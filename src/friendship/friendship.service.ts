@@ -41,6 +41,7 @@ export class FriendshipService {
             userId: true,
             username: true,
             fullName: true,
+            imageUrl: true,
           },
         },
         status: true,
@@ -58,6 +59,7 @@ export class FriendshipService {
             userId: true,
             username: true,
             fullName: true,
+            imageUrl: true,
           },
         },
         status: true,
@@ -70,6 +72,7 @@ export class FriendshipService {
         username: friendRequest.user.username,
         fullName: friendRequest.user.fullName,
         status: friendRequest.status,
+        imageUrl: friendRequest.user.imageUrl,
       }
     })
 
@@ -79,6 +82,7 @@ export class FriendshipService {
         username: userRequest.friend.username,
         fullName: userRequest.friend.fullName,
         status: userRequest.status,
+        imageUrl: userRequest.friend.imageUrl,
       }
     }))
 
@@ -241,6 +245,7 @@ export class FriendshipService {
         userId: true,
         username: true,
         fullName: true,
+        imageUrl: true,
       },
     })
 
