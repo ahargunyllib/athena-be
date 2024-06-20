@@ -7,9 +7,10 @@ import { ChatGateway } from './chat/chat.gateway';
 import { ChatModule } from './chat/chat.module';
 import { UserModule } from './user/user.module';
 import { SosModule } from './sos/sos.module';
+import { PublicInfoModule } from './public-info/public-info.module';
 
 @Module({
-  imports: [CommonModule, AuthModule, FriendshipModule, LocationModule, ChatModule, UserModule, SosModule],
+  imports: [CommonModule, AuthModule, FriendshipModule, LocationModule, ChatModule, UserModule, SosModule, PublicInfoModule],
   controllers: [],
 })
 export class AppModule {}

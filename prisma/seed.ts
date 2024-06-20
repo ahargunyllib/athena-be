@@ -198,6 +198,54 @@ async function main() {
       type: MessageType.TEXT,
     }
   })
+
+  const post1 = await db.post.create({
+    data: {
+      authorId: billy.userId,
+      content: 'Hello World!',
+      imageUrl: "https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png",
+    }
+  })
+
+  const _post2 = await db.post.create({
+    data: {
+      authorId: selvi.userId,
+      content: 'Hello World!',
+    }
+  })
+
+  const publicInformation1 = await db.publicInformation.create({
+    data: {
+      authorId: billy.userId,
+      postId: post1.postId,
+      latitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[0],
+      longitude: faker.location.nearbyGPSCoordinate({
+        origin: [-7.9355808, 112.6274864],
+        radius: 1,
+        isMetric: true
+      })[1],
+    }
+  })
+
+  await db.report.create({
+    data: {
+      publicInformationId: publicInformation1.publicInformationId,
+      authorId: aufii.userId,
+      reason: 'Spam',
+    }
+  })
+
+  await db.comment.create({
+    data: {
+      postId: post1.postId,
+      authorId: selvi.userId,
+      content: 'Hello Billy!',
+    }
+  })
 }
 
 main()

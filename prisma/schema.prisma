@@ -22,7 +22,7 @@ model User {
   dateOfBirth DateTime
   latitude    Decimal? @db.Decimal(9, 6)
   longitude   Decimal? @db.Decimal(9, 6)
-  imageUrl    String? @default("https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png")
+  imageUrl    String?  @default("https://athena-img.s3.ap-southeast-1.amazonaws.com/default-avatar.png")
   password    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -30,7 +30,11 @@ model User {
   friends  Friendship[] @relation("UserFriendship")
   friendOf Friendship[] @relation("FriendFriendship")
 
-  messages Message[]
+  messages          Message[]
+  posts              Post[]
+  reports            Report[]
+  publicInformations PublicInformation[]
+  comments          Comment[]
 
   @@map("users")
 }
@@ -90,4 +94,62 @@ enum MessageType {
   VIDEO
   AUDIO
   LOCATION
+}
+
+model Post {
+  postId    String   @id @default(uuid())
+  content   String
+  imageUrl  String?
+  createdAt DateTime @default(now())
+
+  authorId String 
+  author   User   @relation(fields: [authorId], references: [userId])
+
+  publicInformation PublicInformation?
+  comments          Comment[]
+
+  @@map("posts")
+}
+
+model PublicInformation {
+  publicInformationId String   @id @default(uuid())
+  latitude            Decimal? @db.Decimal(9, 6)
+  longitude           Decimal? @db.Decimal(9, 6)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [userId])
+
+  postId String @unique
+  post   Post   @relation(fields: [postId], references: [postId])
+
+  report Report[]
+
+  @@map("public_informations")
+}
+
+model Report {
+  reportId String @id @default(uuid())
+  reason   String
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [userId])
+
+  publicInformationId String
+  publicInformation   PublicInformation @relation(fields: [publicInformationId], references: [publicInformationId])
+
+  @@map("reports")
+}
+
+model Comment {
+  commentId String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [userId])
+
+  postId String 
+  post   Post   @relation(fields: [postId], references: [postId])
+
+  @@map("comments")
 }
