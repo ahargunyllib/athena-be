@@ -22,3 +22,20 @@ export class UpdateUserDto {
     this.phoneNumber = data.phoneNumber;
   }
 }
+
+export const updateCredentialsSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+export type UpdateCredentialsDtoType = z.infer<typeof updateCredentialsSchema>;
+
+export class UpdateCredentialsDto {
+  email: string;
+  password: string;
+
+  constructor(data: UpdateCredentialsDtoType) {
+    this.email = data.email;
+    this.password = data.password;
+  }
+}

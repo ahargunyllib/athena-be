@@ -8,8 +8,9 @@ import {
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston'
 import { PrismaService } from '../common/prisma.service'
 import { ValidationService } from '../common/validation.service'
-import { UpdateUserDtoType, updateUserSchema } from './dto/update.dto'
+import { UpdateCredentialsDtoType, UpdateUserDtoType, updateCredentialsSchema, updateUserSchema } from './dto/update.dto'
 import { MulterService } from '../common/multer.service'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UserService {
@@ -87,6 +88,46 @@ export class UserService {
         userId,
       },
       data: { ...validatedDto, imageUrl },
+      select: {
+        userId: true,
+        email: true,
+        username: true,
+        fullName: true,
+        phoneNumber: true,
+        dateOfBirth: true,
+        imageUrl: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    })
+  }
+
+  async updateUserCredentials(
+    userId: string,
+    updateDto: UpdateCredentialsDtoType,
+  ) {
+    const validatedDto = this.validationService.validate(
+      updateCredentialsSchema,
+      updateDto,
+    )
+
+    const user = await this.db.user.findUnique({
+      where: {
+        email: validatedDto.email,
+      },
+    })
+
+    if (user && user.userId !== userId) {
+      throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST)
+    }
+
+    validatedDto.password = await bcrypt.hash(validatedDto.password, 10)
+
+    return await this.db.user.update({
+      where: {
+        userId,
+      },
+      data: validatedDto,
       select: {
         userId: true,
         email: true,

@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   HttpStatus,
@@ -18,7 +19,7 @@ import { JwtGuard } from '../auth/guard/jwt.guard'
 import { Request, Response } from 'express'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { UserTokenDtoType } from '../auth/dto/token.dto'
-import { UpdateUserDtoType } from './dto/update.dto'
+import { UpdateCredentialsDtoType, UpdateUserDtoType } from './dto/update.dto'
 
 @Controller('/api/user')
 export class UserController {
@@ -56,6 +57,21 @@ export class UserController {
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
       message: 'User profile updated successfully',
+      data,
+    })
+  }
+
+  @Put('/update-credentials')
+  @UseGuards(JwtGuard)
+  async updateUserCredentials(@Req() req: Request, @Res() res: Response) {
+    const data = await this.userService.updateUserCredentials(
+      (req.user as UserTokenDtoType).userId,
+      req.body as UpdateCredentialsDtoType,
+    )
+
+    return res.status(HttpStatus.OK).json({
+      statusCode: HttpStatus.OK,
+      message: 'User credentials updated successfully',
       data,
     })
   }
